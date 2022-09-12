@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import orgsfcrud.dao.EmployeeDao;
@@ -27,6 +28,13 @@ public class MainController {
 		List<Employee> employees = employeeDao.getEmployees();
 		m.addAttribute("employees", employees);
 		return "index";
+	}
+
+	@RequestMapping("/api/employees")
+	public @ResponseBody List<Employee> getEmployees(Model m) {
+		List<Employee> employees = employeeDao.getEmployees();
+		m.addAttribute("employees", employees);
+		return employees;
 	}
 	
 	// show add emploee form
